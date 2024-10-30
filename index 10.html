@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solana Dashboard | Premium Swap & Charts</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      background: linear-gradient(to right, #06b6d4, #3b82f6);
+      background-size: 200% 200%;
+      animation: gradientShift 10s linear infinite;
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 100% 50%; }
+    }
+
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(50, 50, 50, 0.8);
+      border-bottom: 2px solid rgba(211, 211, 211, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    h1 {
+      font-weight: 600;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    .cta-button {
+      position: absolute;
+      right: 20px;
+      padding: 12px 24px;
+      background: linear-gradient(90deg, #3b82f6, #06b6d4);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(90deg, #2563eb, #0284c7);
+      transform: scale(1.05);
+    }
+
+    .widget-container {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .tv-screen {
+      width: 100%;
+      max-width: 1000px;
+      height: 450px;
+      margin: 40px auto;
+      background-color: #000;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+      padding: 15px; /* Adds padding inside the TV */
+    }
+
+    .tv-screen iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .tablet {
+      flex: 1 1 calc(48% - 10px);
+      height: 600px;
+      margin: 20px auto;
+      background-color: #111;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+      border-radius: 25px;
+      position: relative;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+      padding: 10px; /* Adds realistic padding */
+      overflow: hidden;
+    }
+
+    .tablet iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 15px;
+      transform: scale(1.01); /* Ensures content fills the tablet */
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: 40px auto;
+      gap: 20px;
+    }
+
+    .iphone-15 {
+      width: 390px;
+      height: 844px;
+      margin: 40px auto;
+      background-color: #1c1c1e;
+      border-radius: 40px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
+      border: 2px solid #333;
+      padding: 15px; /* Adds padding inside the iPhone */
+    }
+
+    .iphone-15 iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 15px;
+      transform: scale(1.01); /* Ensures content fits nicely */
+    }
+
+    .camera-notch {
+      width: 180px;
+      height: 30px;
+      background-color: #333;
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 15px;
+    }
+
+    .side-buttons {
+      position: absolute;
+      top: 120px;
+      left: -10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .volume-up, .volume-down {
+      width: 5px;
+      height: 40px;
+      background-color: #555;
+      border-radius: 5px;
+    }
+
+    .bottom-bar {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 130px;
+      height: 5px;
+      background-color: rgba(0, 0, 0, 0.15);
+      border-radius: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background-color: rgba(50, 50, 50, 0.8);
+      color: #fff;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .tablet, .iphone-15, .tv-screen {
+        width: 90%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo-title">
+      <img src="https://cryptologos.cc/logos/solana-sol-logo.png" alt="Solana Logo" width="50">
+      <h1>Solana Dashboard</h1>
+    </div>
+    <a href="https://www.tradingview.com/chart/NTA6mN1K/?symbol=BINANCE%3ASOLUSDC" target="_blank" class="cta-button">Check Alert &rarr;</a>
+  </header>
+
+  <div class="widget-container">
+    <div class="livecoinwatch-widget-5"></div>
+  </div>
+
+  <div class="tv-screen">
+    <iframe 
+      src="https://www.youtube.com/embed/CF2SVyV8A4I" 
+      title="YouTube Live Stream" 
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <div class="container">
+    <div class="tablet">
+      <iframe src="https://app.mango.markets" title="Mango Markets"></iframe>
+    </div>
+
+    <div class="tablet">
+      <iframe src="https://app.drift.trade" title="Drift Trade"></iframe>
+    </div>
+  </div>
+
+  <div class="iphone-15">
+    <div class="camera-notch"></div>
+    <div class="side-buttons">
+      <div class="volume-up"></div>
+      <div class="volume-down"></div>
+    </div>
+    <iframe src="https://pluto.tv/us/live-tv/5c2d64ffbdf11b71587184b8" allowfullscreen></iframe>
+    <div class="bottom-bar"></div>
+  </div>
+
+  <footer>
+    &copy; 2024 Solana Dashboard. All rights reserved.
+  </footer>
+</body>
+
+</html>
